@@ -67,16 +67,29 @@ class AttendanceController extends Controller
 
 public function index()
 {
+    
     // Fetch all employees along with their attendance and departments
-    $employees = Employee::with(['attendances', 'departments'])->get();
-
-    return view('attendances.index', compact('employees'));
+    $employees = Employee ::with('attendance')->get();
+    
+    // $departments = Employee::with('departments')->get();
+    // dd($departments);
+    return view('one_to_one', compact('employees'));
 }
-
-public function create()
+public function onetomany()
 {
-    // Fetch all employees to display in the dropdown
-    $employees = Employee::all();
-    return view('attendances.create', compact('employees'));
+    
+    $employees = Employee ::with('attendanceee')->get();
+
+    return view('one_to_many', compact('employees'));
 }
+
+
+// public function create()
+// {
+//     // Fetch all employees to display in the dropdown
+//     $employees = Employee::all();
+//     return view('attendances.create', compact('employees'));
+// }
+
+
 }

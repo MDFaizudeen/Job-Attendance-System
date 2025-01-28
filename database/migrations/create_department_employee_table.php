@@ -14,8 +14,8 @@ public function up()
 {
     Schema::create('department_employee', function (Blueprint $table) {
         $table->id();
-        $table->unsignedBigInteger('employee_id'); // Foreign key without constraint
-        $table->unsignedBigInteger('department_id'); // Foreign key without constraint
+        $table->unsignedBigInteger('employee_id'); // Foreign key 
+        $table->unsignedBigInteger('department_id'); // Foreign key 
         $table->timestamps();
     });
 }
