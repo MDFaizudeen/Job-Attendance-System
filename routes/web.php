@@ -21,9 +21,21 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('one_to_
 
 // Display the form to create attendance
 Route::get('/attendance/create', [AttendanceController::class, 'onetomany'])->name('one_to_many');
+Route::get('/many', [AttendanceController::class, 'manytomany']);
+Route::get('/has_one_through', [AttendanceController::class, 'hasonethrough']);
+Route::get('/has_through_many', [AttendanceController::class, 'hasthroughmany']);
+
+
 
 // Store a new attendance record
 Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
 
-
+Route::get('/home', function () {
+    return view('home');
+});
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/hi', function () {
+        return view('home');
+    });
+});
 

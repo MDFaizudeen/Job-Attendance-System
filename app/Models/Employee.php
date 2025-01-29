@@ -42,11 +42,22 @@ class Employee extends Model
     {
         return $this->hasMany(Attendance::class, 'employee_id');
     }
-  
-    // public function departments()
-    // {
-    //     return $this->belongsToMany(Department::class);
-    // }
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'department_employee','employee_id','department_id');
+    }
+    public function department()
+    {
+        return $this->hasOneThrough(Department::class, DepartmentEmployee::class, 'employee_id', 'id', 'id', 'department_id');
+    }
+    public function departmentss()
+    {
+        return $this->hasManyThrough(Department::class, DepartmentEmployee::class, 'employee_id', 'id', 'id', 'department_id');
+    }
+    public function attendances()
+{
+    return $this->hasMany(Attendance::class);
+}
 }
  
 

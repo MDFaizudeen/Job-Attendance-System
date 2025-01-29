@@ -79,9 +79,31 @@ public function onetomany()
 {
     
     $employees = Employee ::with('attendanceee')->get();
-
     return view('one_to_many', compact('employees'));
 }
+public function manytomany()
+{
+    
+    $employees = Employee ::with('departments')->get();
+    return view('many_to_many', compact('employees'));
+}
+// public function hasonethrough()
+// {
+    
+//     $employees = Employee ::with('department')->get();
+    
+//     return view('has_one_through', compact('employees'));
+// }
+
+public function hasthroughmany()
+{
+    $employees = Employee::with('departmentss')->get();
+    return view('has_through_many', compact('employees'));
+
+}  
+
+
+
 
 
 // public function create()
