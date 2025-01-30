@@ -58,6 +58,15 @@ class Employee extends Model
 {
     return $this->hasMany(Attendance::class);
 }
+public function profile()
+{
+    return $this->morphOne(Profile::class, 'profileable');
+}
+public function profiles()
+{
+    return $this->hasMany(Profile::class, 'profileable_id')
+        ->where('profileable_type', Employee::class);
+}
 }
  
 

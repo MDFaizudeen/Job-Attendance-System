@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','dept_name'];
 
-    public function employees()
+    public function employees() //
     {
         return $this->belongsTo(Employee::class, 'department_id', );
     }
@@ -27,8 +27,12 @@ class Department extends Model
             'department_id'  // Local key on the intermediate model (DepartmentEmployee)
         );
     }
-    public function employeesmanythrough()
+    public function employeesmanythrough()   //Define a many-to-many relationship:
     {
         return $this->belongsToMany(Employee::class,  'department_employee','employee_id','department_id');
+    }
+    public function profile() //Define a polymorphic relationship
+    {
+        return $this->morphOne(Profile::class, 'profileable');
     }
 }

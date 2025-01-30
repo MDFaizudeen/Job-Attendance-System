@@ -65,53 +65,48 @@ use App\Models\Department;
 class AttendanceController extends Controller  
 {
 
-public function index()
+public function index() // This function handles fetching and displaying employees with their attendance records
 {
     
-    // Fetch all employees along with their attendance and departments
+    //Fetch all employees along with their attendance and departments
     $employees = Employee ::with('attendance')->get();
     
     // $departments = Employee::with('departments')->get();
     // dd($departments);
     return view('one_to_one', compact('employees'));
 }
-public function onetomany()
-{
-    
+public function onetomany()  //Fetch employees with multiple attendance records (one-to-many)
+{   
     $employees = Employee ::with('attendanceee')->get();
     return view('one_to_many', compact('employees'));
 }
-public function manytomany()
-{
-    
+public function manytomany() //Fetch employees with their departments (many-to-many)
+{    
     $employees = Employee ::with('departments')->get();
     return view('many_to_many', compact('employees'));
 }
-// public function hasonethrough()
-// {
+public function hasonethrough() //Fetch employees with department through another model (has one through)
+{
     
-//     $employees = Employee ::with('department')->get();
+    $employees = Employee ::with('department')->get();
     
-//     return view('has_one_through', compact('employees'));
-// }
+    return view('has_one_through', compact('employees'));
+}
 
-public function hasthroughmany()
+public function hasthroughmany()  //Fetch employees with multiple departments (has many through)
 {
     $employees = Employee::with('departmentss')->get();
     return view('has_through_many', compact('employees'));
 
 }  
-
-
-
-
-
-// public function create()
-// {
-//     // Fetch all employees to display in the dropdown
-//     $employees = Employee::all();
-//     return view('attendances.create', compact('employees'));
-// }
-
-
+public function polymorphicone()  //Fetch employees with their profile (polymorphic one-to-one)
+{
+$employees = Employee::with('profile')->get();
+return view('polymorphic_one', compact('employees'));
+}
+public function polymorphicmany() //Fetch employees with multiple profiles (polymorphic one-to-many)
+{
+$employees = Employee::with('profiles')->get();
+return view('polymorphic_many', compact('employees'));
+}
 }
