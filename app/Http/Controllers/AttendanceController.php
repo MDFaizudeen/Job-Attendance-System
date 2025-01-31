@@ -66,13 +66,9 @@ class AttendanceController extends Controller
 {
 
 public function index() // This function handles fetching and displaying employees with their attendance records
-{
-    
+{   
     //Fetch all employees along with their attendance and departments
     $employees = Employee ::with('attendance')->get();
-    
-    // $departments = Employee::with('departments')->get();
-    // dd($departments);
     return view('one_to_one', compact('employees'));
 }
 public function onetomany()  //Fetch employees with multiple attendance records (one-to-many)
@@ -87,17 +83,13 @@ public function manytomany() //Fetch employees with their departments (many-to-m
 }
 public function hasonethrough() //Fetch employees with department through another model (has one through)
 {
-    
-    $employees = Employee ::with('department')->get();
-    
+    $employees = Employee ::with('department')->get();   
     return view('has_one_through', compact('employees'));
 }
-
 public function hasthroughmany()  //Fetch employees with multiple departments (has many through)
 {
     $employees = Employee::with('departmentss')->get();
     return view('has_through_many', compact('employees'));
-
 }  
 public function polymorphicone()  //Fetch employees with their profile (polymorphic one-to-one)
 {

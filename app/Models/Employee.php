@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $fillable = ['name', 'email'];
+    protected $fillable = ['name', 'email', 'password'];
 
     public function attendance()
     {

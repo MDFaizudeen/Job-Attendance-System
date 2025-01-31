@@ -13,12 +13,5 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role)
-    {
-        if (!auth()->user() || auth()->user()->role !== $role) {
-            return redirect('home'); // Redirect to home page if the user does not have the required role
-        }
-
-        return $next($request);
-    }
+  
 }
