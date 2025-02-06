@@ -17,6 +17,7 @@ public function up()
         $table->unsignedBigInteger('employee_id'); // Foreign key without constraint
         $table->date('attendance_date');
         $table->enum('status', ['present', 'absent', 'leave']);
+        $table->timestamp('marked_at')->useCurrent();
         $table->timestamps();
     });
 }

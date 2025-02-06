@@ -20,13 +20,13 @@
 //         return view('attendances.create', compact('employees'));
 //     }
 
-//     public function store(Request $request)
-//     {
-//         $request->validate([
-//             'employee_id' => 'required|exists:employees,id',
-//             'attendance_date' => 'required|date',
-//             'status' => 'required|in:present,absent,late',
-//         ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'employee_id' => 'required|exists:employees,id',
+    //         'attendance_date' => 'required|date',
+    //         'status' => 'required|in:present,absent,late',
+    //     ]);
 
 //         Attendance::create($request->all());
 
@@ -62,6 +62,8 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Attendance;
 use App\Models\Department;
+use App\Notifications\AttendanceMarked;
+
 class AttendanceController extends Controller  
 {
 
@@ -78,7 +80,7 @@ public function onetomany()  //Fetch employees with multiple attendance records 
 }
 public function manytomany() //Fetch employees with their departments (many-to-many)
 {    
-    $employees = Employee ::with('departments')->get();
+    $employees = Employee::paginate(3);
     return view('many_to_many', compact('employees'));
 }
 public function hasonethrough() //Fetch employees with department through another model (has one through)
@@ -100,5 +102,12 @@ public function polymorphicmany() //Fetch employees with multiple profiles (poly
 {
 $employees = Employee::with('profiles')->get();
 return view('polymorphic_many', compact('employees'));
+}
+public function markAttendance($employeeId, $status)
+{
+    $employee = Employee::find($employeeId); // Assuming User is the model for employees
+    $employee->notify(new AttendanceMarked($employee->name, $status));
+
+    return response()->json(['message' => 'Attendance marked']);
 }
 }

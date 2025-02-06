@@ -44,6 +44,7 @@ class Employee extends Model
     }
     public function departments()
     {
+    
         return $this->belongsToMany(Department::class, 'department_employee','employee_id','department_id');
     }
     public function department()
@@ -66,6 +67,11 @@ public function profiles()
 {
     return $this->hasMany(Profile::class, 'profileable_id')
         ->where('profileable_type', Employee::class);
+}
+public function leave_request()
+{
+
+    return $this->hasOne(LeaveRequest::class,'employee_id');
 }
 }
  

@@ -53,7 +53,7 @@
         <tr>
             <td>{{ $employee->name }}</td>
             <td>{{ $employee->email }}</td>
-            <td>{{ $employee->department->dept_name }}</td>
+            <td>{{ $employee->department->dept_name ?? ''}}</td>
         </tr>
         @endforeach
     </tbody>

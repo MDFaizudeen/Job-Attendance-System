@@ -52,7 +52,7 @@
         <h1>Welcome User </h1>
      
         <form method="POST" action="{{ route('logout') }}">
-          <!-- @csrf -->
+          @csrf
             <button type="submit" class="logout-button">Logout</button>
         </form>
     </div>

@@ -60,7 +60,7 @@
 </style>
 </head>
 <body>
-<h2 class="table-title">Has One Through Relationship</h2>
+<h2 class="table-title"> One To One Relationship</h2>
 <table>
     <thead>
         <tr>
