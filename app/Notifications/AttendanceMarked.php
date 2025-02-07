@@ -27,12 +27,12 @@ class AttendanceMarked extends Notification
         return (new MailMessage)
             ->line("Hello {$this->employeeName},")
             ->line("Your attendance has been marked as {$this->status}.")
-            ->action('View Attendance', url('/attendance'))
+            ->action('View Attendance', url('/attendances'))
             ->line('Thank you for using our application!');
     }
     public function markAttendance($employeeId, $status)
     {
-        $employee = User::find($employeeId); // Assuming User is the model for employees
+        $employee = User::find($employeeId);
         $employee->notify(new AttendanceMarked($employee->name, $status));
 
         return response()->json(['message' => 'Attendance marked']);

@@ -105,7 +105,7 @@ return view('polymorphic_many', compact('employees'));
 }
 public function markAttendance($employeeId, $status)
 {
-    $employee = Employee::find($employeeId); // Assuming User is the model for employees
+    $employee = Employee::find($employeeId); 
     $employee->notify(new AttendanceMarked($employee->name, $status));
 
     return response()->json(['message' => 'Attendance marked']);

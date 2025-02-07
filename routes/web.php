@@ -3,8 +3,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\LeaveRequestController;  
-
+use App\Http\Controllers\LeaveRequestController;
+use App\Mail\Email;
+use Illuminate\Support\Facades\Mail;
+use Mailgun\Model\Route\Action;
 
 // Routes for various types of relationships in AttendanceController
 // Route::get('/attendance', [AttendanceController::class, 'index'])->name('one-to-one');//One-to-One relationship route
@@ -61,4 +63,9 @@ Route::get('/home', function () {
 })->name('home');
 Route::get('/welcome', function () {
     return view('welcome');
+});
+
+Route::get(uri:'/send',action:function() {
+    Mail::to(users:'faizudeen@colanonline.com')->send(new Email());
+    return "Email Send!";
 });
